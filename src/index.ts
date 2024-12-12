@@ -1,10 +1,8 @@
-// core exports
 export * from './core/result-basic';
 export * from './core/result';
 export * from './core/error';
 export * from './core/option';
 
-// helpers exports
 export * from './helpers/trycatch';
 export * from './helpers/promise';
 export * from './helpers/async';

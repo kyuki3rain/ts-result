@@ -1,5 +1,9 @@
 import { Result,Ok,Err } from '../core/result-basic';
 
+/**
+ * mapAsync: if r is Ok, apply fn async and wrap the result; if Err, return Err.
+ * Similar to map, but for async functions.
+ */
 export async function mapAsync<T,U,E>(
   r:Result<T,E>,
   fn:(val:T)=>Promise<U>
@@ -13,6 +17,10 @@ export async function mapAsync<T,U,E>(
   }
 }
 
+/**
+ * andThenAsync: if Ok, apply fn returning a Result; if Err, return Err.
+ * Async version of andThen.
+ */
 export async function andThenAsync<T,U,E>(
   r:Result<T,E>,
   fn:(val:T)=>Promise<Result<U,E>>
@@ -21,6 +29,10 @@ export async function andThenAsync<T,U,E>(
   return fn(r.value);
 }
 
+/**
+ * orElseAsync: if Err, apply fn returning a Result<T,F>; if Ok, return Ok.
+ * Async version of orElse.
+ */
 export async function orElseAsync<T,E,F>(
   r:Result<T,E>,
   fn:(err:E)=>Promise<Result<T,F>>
@@ -29,6 +41,10 @@ export async function orElseAsync<T,E,F>(
   return fn(r.error);
 }
 
+/**
+ * mapErrAsync: if Err, apply fn async to transform error; if Ok, return Ok.
+ * Async version of mapErr.
+ */
 export async function mapErrAsync<T,E,F>(
   r:Result<T,E>,
   fn:(err:E)=>Promise<F>
